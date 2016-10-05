@@ -22,10 +22,10 @@ describe Journey do
     expect(subject).not_to be_in_journey
   end
 
-  describe "#fare" do
+  describe "#calculate_fare" do
     it "calculates the fare" do
       subject.finish_journey(exit_station)
-      expect(subject.fare).to eq Oystercard::MINIMUM_BALANCE
+      expect(subject.calculate_fare).to eq Journey::MINIMUM_FARE
     end
   end
 end

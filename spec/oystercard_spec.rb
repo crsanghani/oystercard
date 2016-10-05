@@ -5,10 +5,11 @@ describe Oystercard do
     let(:station) {double :station}
     let(:entry_station) {double :entry_station}
     let(:exit_station)  {double :exit_station}
+    let(:journey) {double :journey}
 
-    it 'should check if there are empty lists of journeys' do
-      expect(subject.journeys).to match_array([])
-    end
+  it 'should check if there are empty lists of journeys' do
+    expect(subject.journeys).to match_array([])
+  end
 
   it 'is not in a journey' do
     expect(subject).not_to be_in_journey
@@ -75,5 +76,9 @@ end
     end
   end
 
+    it 'has a penalty fare' do
+      subject.
+      expect(journey.calculate_fare).to eq Journey::PENALTY_FARE
+    end
 
 end

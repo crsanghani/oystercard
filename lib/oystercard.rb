@@ -53,6 +53,7 @@ private
 
   def end_journey(station)
     @current_journey.finish_journey(station)
+    @current_journey = nil
   end
 
 
