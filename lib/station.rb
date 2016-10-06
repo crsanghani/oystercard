@@ -1,3 +1,5 @@
+require "spec_helper"
+
 class Station
 
 attr_reader :name, :zone

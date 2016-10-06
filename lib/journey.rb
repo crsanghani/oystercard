@@ -1,4 +1,4 @@
-require 'oystercard'
+require 'spec_helper'
 
 class Journey
 

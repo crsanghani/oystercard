@@ -1,5 +1,4 @@
-require 'journey'
-require 'station'
+require 'spec_helper'
 
 describe Journey do
 
@@ -41,8 +40,5 @@ describe Journey do
       end
     end
   end
-
-
-
 
 end
