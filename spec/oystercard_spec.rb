@@ -16,13 +16,6 @@ describe Oystercard do
 
 describe '#touch_in' do
 
-
-  it 'records the entry station' do
-    subject.top_up(1)
-    subject.touch_in(station)
-    expect(subject.entry_station).to eq station
-  end
-
   let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
 
   it 'stores a journey' do
@@ -40,17 +33,6 @@ describe '#touch_out' do
     subject.top_up(5)
     subject.touch_in(station)
     subject.touch_out(station)
-  end
-
-
-
-
-  it 'can touch out' do
-    expect(subject.in_journey).to be false
-  end
-
-  it 'stores the exit station' do
-    expect(subject.exit_station).to eq station
   end
 
   it 'deducts the correct money after the journey' do
