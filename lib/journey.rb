@@ -1,3 +1,5 @@
+require 'oystercard'
+
 class Journey
 
   MINIMUM_FARE = 1
@@ -17,18 +19,15 @@ class Journey
 
   def finish(station)
     @exit_station = station
+    @complete = true
     calculate_fare
     self
   end
 
-  private
+  #private
 
   def calculate_fare
-    if @complete == true
-      @fare = MINIMUM_FARE
-    else
-      @fare = PENALTY_FARE
-    end
+    @fare = MINIMUM_FARE
   end
 
 end
