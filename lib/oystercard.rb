@@ -1,4 +1,5 @@
-require 'spec_helper'
+require_relative 'journey'
+require_relative 'station'
 
 class Oystercard
 
@@ -17,28 +18,22 @@ attr_reader :balance, :entry_station, :exit_station, :in_journey, :journeys
     @balance += amount
   end
 
-  def in_journey?
-    !!entry_station
-  end
-
   def touch_in(station)
     fail 'Insufficient funds for jouney' if @balance < MINIMUM_BALANCE
+    new_journey(station)
     @in_journey = true
-    @entry_station = station
-
   end
 
   def touch_out(station)
-    @exit_station = station
-    deduct(MINIMUM_BALANCE)
-    journey
+    end_journey(station)
+    deduct(@current_journey.fare)
+    @current_journey = nil
   end
-
 
 private
 
-  def journey
-    @journeys.push({entry_station: entry_station, exit_station: exit_station})
+  def add_journey
+    @journeys << @current_journey
     @in_journey = false
   end
 
@@ -47,11 +42,24 @@ private
   end
 
   def new_journey(station)
-    @current_journey = Journey.new(station)
+    if @in_journey == true
+      @current_journey.penalty_finish
+      deduct(@current_journey.fare)
+      add_journey
+    else
+      @current_journey = Journey.new(station)
+    end
   end
 
   def end_journey(station)
-    @current_journey.finish(station)
-    @current_journey = nil
+    if @in_journey == true
+      @current_journey.finish(station)
+      add_journey
+      # @current_journey = nil
+    else
+      @current_journey = (Journey.new).finish(station)
+      add_journey
+      # @current_journey = nil
+    end
   end
 end
