@@ -10,10 +10,6 @@ describe Oystercard do
       expect(subject.journeys).to match_array([])
     end
 
-  it 'is not in a journey' do
-    expect(subject).not_to be_in_journey
-  end
-
 describe '#touch_in' do
 
   let(:journey){ {entry_station: entry_station, exit_station: exit_station} }
